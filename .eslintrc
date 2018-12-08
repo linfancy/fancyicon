@@ -1,0 +1,15 @@
+{
+	"extends": "standard",
+	"rules": {
+		"indent": ["error", 4],
+		"semi": ["error", "always"],
+		"prefer-const": ["error"],
+		"no-var": ["error"],
+		"prefer-promise-reject-errors": ["off"],
+		"no-array-constructor": ["off"]
+	},
+	"globals": {
+		"Vue": true,
+		"__static": true
+	}
+}

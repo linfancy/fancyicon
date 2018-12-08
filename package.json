@@ -1,0 +1,53 @@
+{
+  "name": "FancyIcon",
+  "version": "0.0.0",
+  "license": "MIT",
+  "scripts": {
+    "dev": "electron-webpack dev",
+    "compile": "electron-webpack",
+    "dist": "yarn compile && electron-builder",
+    "dist:dir": "yarn dist --dir -c.compression=store -c.mac.identity=null"
+  },
+  "dependencies": {
+    "source-map-support": "^0.5.9",
+    "svg2ttf": "^4.1.0",
+    "svgo": "^1.1.1",
+    "svgpath": "^2.2.1",
+    "ttf2eot": "^2.0.0",
+    "ttf2woff": "^2.0.1",
+    "ttf2woff2": "^2.0.3",
+    "underscore": "^1.9.1",
+    "xml2js": "^0.4.19"
+  },
+  "devDependencies": {
+    "electron": "3.0.7",
+    "electron-builder": "^20.29.0",
+    "electron-updater": "^4.0.5",
+    "electron-webpack": "^2.3.1",
+    "eslint": "^5.9.0",
+    "eslint-config-standard": "^12.0.0",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-node": "^8.0.0",
+    "eslint-plugin-promise": "^4.0.1",
+    "eslint-plugin-standard": "^4.0.0",
+    "webpack": "^4.23.1"
+  },
+  "resolutions": {
+    "upath": "^1.0.5"
+  },
+  "electronWebpack": {
+    "title": "FancyIcon"
+  },
+  "build": {
+		"publish": [
+			{
+				"provider": "generic",
+				"url": "http://127.0.0.1:3000/"
+			}
+		],
+		"appId": "fancyicon.io",
+		"nsis": {
+			"perMachine": true
+		}
+	}
+}

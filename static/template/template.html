@@ -1,0 +1,38 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<title>webfont</title>
+<link rel="stylesheet" type="text/css" href="css/<%= name %>.css">
+<style type="text/css">
+	ul,li{list-style:none;}
+	ul{overflow:hidden;margin:0;padding:0;}
+	li{width: 90px;float: left;text-align: center;}
+	pre{padding: 5px;line-height: 20px;background: #e8e8e8;height: 20px;}
+</style>
+</head>
+<body>
+
+<div class="main">
+	<h1>webfont</h1>
+	<h2>预览 Preview(兼容ie7)</h2>
+	<pre>&lt;div class="iconfont"&gt;&amp;#xe800&lt;/div&gt;</pre>
+	<ul>
+		<% _.each(glyphs, function (c) { %>
+		<li><div><h3><%= c.unicode %></h3><div class="<%= name %>"><%= c.unicodeText %></div></div></li>
+		<% }) %>
+	</ul>
+
+	<h2>预览 Preview(ie7以上)</h2>
+	<pre>&lt;div class="iconfont icon-xxx"&gt;&lt;/div&gt;</pre>
+	<ul>
+		<% _.each(glyphs, function (c) { %>
+		<li><div><h3><%= c.unicode %></h3><div class="<%= name %> <%= css_prefix_text %>-<%= c.name %>"></div></div></li>
+		<% }) %>
+	</ul>
+
+</div>
+</body>
+</html>
