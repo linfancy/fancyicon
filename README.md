@@ -15,33 +15,21 @@
 * 点击确认，即可生成iconfont字体图标，对应的css，和一个示例页面
 
 ## 开始开发
-Simply clone down this reposity, install dependencies, and get started on your application.
-
-The use of the [yarn](https://yarnpkg.com/) package manager is **strongly** recommended, as opposed to using `npm`.
 
 ```bash
 # clone from git
 git clone https://github.com/linfancy/fancyicon.git
 
-# install all the dependencies
+# install dependencies
 cd fancyicon & npm install
 
-# install dependencies
+# develop
+npm run dev
 
-```
+# compile
+npm run compile
 
-### Development Scripts
+# dist
+npm run dist
 
-```bash
-# run application in development mode
-yarn dev
-
-# compile source code and create webpack output
-yarn compile
-
-# `yarn compile` & create build with electron-builder
-yarn dist
-
-# `yarn compile` & create unpacked build with electron-builder
-yarn dist:dir
 ```
