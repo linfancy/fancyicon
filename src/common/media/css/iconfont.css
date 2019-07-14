@@ -1,0 +1,34 @@
+@font-face {
+    font-family: 'iconfont';
+    src: url('../font/iconfont.eot?70059698');
+    src: url('../font/iconfont.eot?70059698#iefix') format('embedded-opentype'),
+    url('../font/iconfont.woff2?70059698') format('woff2'),
+    url('../font/iconfont.woff?70059698') format('woff'),
+    url('../font/iconfont.ttf?70059698') format('truetype'),
+    url('../font/iconfont.svg?70059698#iconfont') format('svg');
+}
+.iconfont:before, [class^="icon-"]:before, [class*=" icon-"]:before,.iconfont{
+    font-family: "iconfont";
+    font-style: normal;
+    font-weight: normal;
+    speak: none;
+    display: inline-block;
+    text-decoration: inherit;
+    text-align: center;
+     font-size: 30px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-reset:before{content:'\e801';}/*\e801*/
+
+.icon-close:before{content:'\e803';}/*\e803*/
+
+.icon-F:before{content:'\e804';}/*\e804*/
+
+.icon-select:before{content:'\e805';}/*\e805*/
+
+.icon-shrink:before{content:'\e802';}/*\e802*/
+
+.icon-update:before{content:'\e806';}/*\e806*/
+

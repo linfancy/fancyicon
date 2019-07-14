@@ -1,0 +1,27 @@
+@font-face {
+    font-family: '<%=name%>';
+    src: url('../font/<%= name %>.eot?70059698');
+    src: url('../font/<%= name %>.eot?70059698#iefix') format('embedded-opentype'),
+    url('../font/<%= name %>.woff2?70059698') format('woff2'),
+    url('../font/<%= name %>.woff?70059698') format('woff'),
+    url('../font/<%= name %>.ttf?70059698') format('truetype'),
+    url('../font/<%= name %>.svg?70059698#<%= name %>') format('svg');
+    <% if(base64){ %>
+    src: url('<%= base64 %>') format('truetype');
+    <% } %>
+}
+.<%= name %>:before, [class^="<%= css_prefix_text %>-"]:before, [class*=" <%= css_prefix_text %>-"]:before,.<%= name %>{
+    font-family: "<%= name %>";
+    font-style: normal;
+    font-weight: normal;
+    speak: none;
+    display: inline-block;
+    text-decoration: inherit;
+    text-align: center;
+     font-size: 30px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+<% _.each(glyphs, function (c) { %>
+.<%= css_prefix_text %>-<%= c.name%>:before{content:'<%= c.unicode %>';}/*<%= c.unicode %>*/
+<% }) %>
