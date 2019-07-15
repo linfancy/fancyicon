@@ -1,11 +1,11 @@
 {
   "name": "SimpleIcon",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "license": "MIT",
   "scripts": {
     "dev": "electron-webpack dev",
     "compile": "electron-webpack",
-    "dist": "yarn compile && electron-builder",
+    "dist": "yarn compile && electron-builder --publish always",
     "dist:dir": "yarn dist --dir -c.compression=store -c.mac.identity=null",
     "prelint": "node ./scripts/check.js"
   },
