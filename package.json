@@ -1,6 +1,6 @@
 {
-  "name": "simpleIcon",
-  "version": "v0.0.2",
+  "name": "SimpleIcon",
+  "version": "0.0.2",
   "license": "MIT",
   "scripts": {
     "dev": "electron-webpack dev",
@@ -8,10 +8,6 @@
     "dist": "yarn compile && electron-builder",
     "dist:dir": "yarn dist --dir -c.compression=store -c.mac.identity=null",
     "prelint": "node ./scripts/check.js"
-  },
-  "repository": {
-    "type" : "git",
-    "url" : "https://github.com/linfancy/fancyicon.git"
   },
   "dependencies": {
     "source-map-support": "^0.5.9",
@@ -44,15 +40,17 @@
     "upath": "^1.0.5"
   },
   "electronWebpack": {
-    "title": "FancyIcon"
+    "title": "SimpleIcon"
   },
   "build": {
     "publish": [
       {
-        "provider": "github"
+        "provider": "github",
+        "repo": "fancyicon",
+        "owner": "linfancy"
       }
     ],
-    "appId": "fancyicon",
+    "appId": "simpleIcon",
     "nsis": {
       "perMachine": true
     },
