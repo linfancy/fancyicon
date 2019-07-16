@@ -1,6 +1,6 @@
 {
   "name": "SimpleIcon",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "license": "MIT",
   "scripts": {
     "dev": "electron-webpack dev",
@@ -12,8 +12,8 @@
   "dependencies": {
     "source-map-support": "^0.5.9",
     "svg2ttf": "^4.1.0",
-    "svgo": "^1.1.1",
-    "svgpath": "^2.2.1",
+    "svgo": "1.2.2",
+    "svgpath": "^2.2.2",
     "ttf2eot": "^2.0.0",
     "ttf2woff": "^2.0.1",
     "ttf2woff2": "^2.0.3",

@@ -7,7 +7,10 @@ import { template as unTemplate, reduce as unReduce } from 'underscore';
 import svgImageFlatten from './svg_image_flatten.js';
 
 const svgOptimizer = new Svgo({
-    plugins: [{ removeViewBox: false }]
+    plugins: [{
+        removeViewBox: false,
+        removeXMLNS: false
+    }]
 });
 
 const xml2jsParser = new xml2js.Parser();
@@ -101,7 +104,7 @@ function normalizePath (config, svg, xml) {
             return reject('No bounding box information could be found for this SVG.');
         }
         // 获取svg.path的路径集合
-        let svgPath = [];
+        let tsvgPath = [];
         let tempSvgPath = [];
         if (svg.path) {
             tempSvgPath = svg.path;
@@ -110,34 +113,39 @@ function normalizePath (config, svg, xml) {
         }
         // 去除未染色路径
         if(tempSvgPath.length <= 1){
-            svgPath = tempSvgPath;
+            tsvgPath = tempSvgPath;
         }else{
             let fillNoneNum = 0,
                 fillNoNum = 0;
-            tempSvgPath.forEach(item => {
+
+            for(let i = 0; i < tempSvgPath.length; i++){
+                let item = tempSvgPath[i];
                 if(item.$.fill === 'none'){
                     fillNoneNum++;
                 }
                 if(!item.$.fill){
                     fillNoNum++;
                 }
-            });
-            tempSvgPath.forEach(item => {
+            };
+            for(let i = 0; i < tempSvgPath.length; i++){
+                let item = tempSvgPath[i];
                 if(fillNoneNum !== 0 && fillNoneNum < tempSvgPath.length){
                     if(item.$.fill !== 'none'){
-                        svgPath.push(item);
+                        tsvgPath.push(item);
                     }
                 }else if(fillNoNum !== 0 && fillNoNum < tempSvgPath.length){
                     if(item.$.fill){
-                        svgPath.push(item);
+                        tsvgPath.push(item);
                     }
-                }else{
+                }else if(fillNoneNum === tempSvgPath.length || fillNoNum === tempSvgPath.length){
+                    tsvgPath.push(item);
+                }else {
                     if(item.$.fill){
-                        svgPath.push(item);
+                        tsvgPath.push(item);
                     }
                 }
                 
-            })
+            }
         }
         //处理use和mask
         if(svg.defs && svg.defs.length > 0 && svg.use && svg.use.length){
@@ -147,7 +155,7 @@ function normalizePath (config, svg, xml) {
                     for(let j = 0; j < svg.defs.length; j++){
                         let path = svg.defs[j];
                         if(path.path && path.path[0] && path.path[0].$ && item.$['xlink:href'] === '#'+path.path[0].$.id){
-                            svgPath.push(path.path[0]);
+                            tsvgPath.push(path.path[0]);
                         }
                     }
                 }
@@ -165,15 +173,15 @@ function normalizePath (config, svg, xml) {
         const scale = fontHeight / Number(viewBox[1]);
 
         // 将所有路径汇总
-        const svgContent = unReduce(svgPath, function (memo, path) {
-            memo += path.$.d;
+        const svgContent = unReduce(tsvgPath, function (memo, path) {
+            memo = memo + " " + path.$.d;
             return memo;
         }, '');
-
         // 将路径放大，移位，路径处理
         const svgImage = svgImageFlatten(xml);
         const path = new SvgPath(svgContent).translate(-svgImage.x, -svgImage.y).scale(scale).abs().round(1);
-
+        console.log(new SvgPath(svgContent))
+        console.log(svgContent)
         const d = setD(path);
         const rpath = new SvgPath(svgContent).scale(scale, -scale).translate(0, fontHeight).abs().round(0);
         const rd = setD(rpath);
@@ -187,6 +195,7 @@ function normalizePath (config, svg, xml) {
                 width: SVG_CONFIG_DEFAULTS.ascent
             }
         });
+
     });
 }
 
@@ -218,12 +227,14 @@ async function svgInfo (info, file, done) {
     const r0 = await readFile(file);
     
     const r1 = await preProcess(r0);
+    console.log(r1);
     
     const r2 = await optimize(r1, file);
-    
+    console.log(r2);
     const r3 = await dealXml2json(r2.optimized, r2.xml);
-    
-    const r4 = await normalizePath(info, r3.optimizedJson.svg, r3.xml);
+    console.log(r3);
+    const r4 = await normalizePath(info, r3.optimizedJson.svg, r3.xml)
+    console.log(r4);
     done && (await done(r4));
 }
 const Svg = {
