@@ -10,6 +10,7 @@
     "prelint": "node ./scripts/check.js"
   },
   "dependencies": {
+    "convertpath": "^1.1.6",
     "source-map-support": "^0.5.9",
     "svg2ttf": "^4.1.0",
     "svgo": "1.2.2",

@@ -1,15 +1,18 @@
 import fs from 'fs';
-import Svgo from 'svgo';
+import SVGO from 'svgo';
 import xml2js from 'xml2js';
 import path from 'path';
 import SvgPath from 'svgpath';
 import { template as unTemplate, reduce as unReduce } from 'underscore';
 import svgImageFlatten from './svg_image_flatten.js';
 
-const svgOptimizer = new Svgo({
+const svgOptimizer = new SVGO({
     plugins: [{
-        removeViewBox: false,
-        removeXMLNS: false
+        removeViewBox: false
+    },{
+        convertShapeToPath: {
+            convertArcs: true
+        }
     }]
 });
 
@@ -61,7 +64,8 @@ function preProcess (xml) {
  */
 function optimize (xml, file) {
     return new Promise((resolve, reject) => {
-        svgOptimizer.optimize(xml, { path: file }).then(function (optimized) {
+        svgOptimizer.optimize(xml, { path: file,convertArcs: true }).then(function (optimized) {
+            console.log(optimized)
             resolve({ xml, optimized });
         });
     });
